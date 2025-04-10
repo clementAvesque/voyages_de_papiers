@@ -2,7 +2,7 @@
     <div>
       <header class="header">
         <div class="header-left">
-          <img src="/logo-white.png" alt="Logo" class="logo" />
+          <!-- <img src="/logo-white.png" alt="Logo" class="logo" /> -->
           <nav class="nav">
             <a href="#">Accueil</a>
             <a href="#">Votre journal</a>
@@ -57,7 +57,7 @@
           </ul>
         </div>
         <div class="footer-logo">
-          <img src="/logo-white.png" alt="Logo" />
+          <!-- <img src="/logo-white.png" alt="Logo" /> -->
         </div>
       </footer>
       <div class="footer-bottom">
