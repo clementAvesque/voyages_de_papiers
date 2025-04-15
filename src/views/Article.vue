@@ -17,19 +17,18 @@
 
     <main class="main">
       <div class="left-panel">
-        <button class="nav-arrow left" @click="prevImage">❮</button>
-
+        <button class="nav-arrow left" @click="prevImage"><img src="/src/images/fleche-gauche.svg" alt="fleche" /></button>
         <div class="image-container">
           <img :src="images[currentImage]" alt="Journal" class="journal-image" />
         </div>
 
-        <button class="nav-arrow right" @click="nextImage">❯</button>
+        <button class="nav-arrow right" @click="nextImage"><img src="/src/images/fleche-droite.svg" alt="fleche" /></button>
       </div>
 
       <aside class="custom-panel">
         <h2>Ajouter ...</h2>
         <label for="date">Date :</label>
-        <select id="date">
+        <select id="date" v-model="selectedDate">
           <option>Sélectionner une option...</option>
           <option>2000</option>
           <option>2001</option>
@@ -45,16 +44,20 @@
         </select>
 
         <label for="theme">Thème :</label>
-        <div class="custom-select" @click="toggleDropdown">
-          <span>{{ selectedTheme }}</span>
-          <div v-if="dropdownVisible" class="dropdown-menu">
-            <div v-for="(image, index) in themeImages" :key="index" class="dropdown-item" @click="selectTheme(image)">
-              <img :src="image" alt="Theme image" />
+          <div>
+            <div class="custom-select" @click="toggleDropdown">
+              <span>{{ selectedTheme }}</span>
+              <div v-if="dropdownVisible" class="dropdown-menu">
+                <div v-for="(theme, index) in themeImages" :key="index" class="dropdown-item" @click="selectTheme(theme)">
+                  <img :src="theme.src" alt="Theme image" />
+                  <span>{{ theme.title }}</span>
+                </div>
+              </div>
             </div>
+            <button class="custom-button" @click="goToPersonnalisation">Continuer la personnalisation</button>
           </div>
-        </div>
 
-        <button class="custom-button">Continuer la personnalisation</button>
+        
       </aside>
     </main>
 
@@ -85,83 +88,99 @@
 </template>
 
 <script>
+import { useCartStore } from '/src/stores/CartStore.js'; // adapte le chemin si besoin
+
 export default {
   data() {
-    return {
-      currentImage: 0,
-      images: [
-        'src/images/journal1.svg',
-        'src/images/journal2.svg',
-        'src/images/journal3.svg',
-        'src/images/journal4.svg'
-      ],
-      selectedTheme: 'Sélectionner une option...',
-      dropdownVisible: false,
-      themeImages: [
-        '/src/images/1.svg',
-        '/src/images/2.svg',
-        '/src/images/3.svg',
-        '/src/images/4.svg',
-        '/src/images/5.svg',
-        '/src/images/6.svg',
-        '/src/images/7.svg',
-        '/src/images/8.svg',
-        '/src/images/9.svg',
-        '/src/images/10.svg',
-        '/src/images/11.svg',
-      ]
-    };
+  return {
+    selectedDate: 'Sélectionner une option...',
+    selectedTheme: 'Sélectionner une option...',
+    dropdownVisible: false,
+    currentImage: 0,
+    images: [
+      'src/images/journal1.svg',
+      'src/images/journal2.svg',
+      'src/images/journal3.svg',
+      'src/images/journal4.svg'
+    ],
+    themeImages: [
+      { src: '/src/images/1.svg', title: 'Gastronomie' },
+      { src: '/src/images/2.svg', title: 'Culture et Art' },
+      { src: '/src/images/3.svg', title: 'Mode' },
+      { src: '/src/images/4.svg', title: 'Voyage' },
+      { src: '/src/images/5.svg', title: 'Article Numérique' },
+      { src: '/src/images/6.svg', title: 'Série et Film' },
+      { src: '/src/images/7.svg', title: 'People' },
+      { src: '/src/images/8.svg', title: 'Autmobile' },
+      { src: '/src/images/9.svg', title: 'Sport' },
+      { src: '/src/images/10.svg', title: 'Fait Divers' },
+      { src: '/src/images/11.svg', title: 'Politique' }
+    ]
+  };
+},
+
+methods: {
+  nextImage() {
+    this.currentImage = (this.currentImage + 1) % this.images.length;
   },
-  methods: {
-    nextImage() {
-      this.currentImage = (this.currentImage + 1) % this.images.length;
-    },
-    prevImage() {
-      this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
-    },
-    toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible;
-    },
-    selectTheme(image) {
-      this.selectedTheme = image;
-      this.dropdownVisible = false;
-    },
+  prevImage() {
+    this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
+  },
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  },
+  selectTheme(theme) {
+    this.selectedTheme = theme.title;
+    this.dropdownVisible = false;
+  },
+  goToPersonnalisation() {
+    const cartStore = useCartStore();
+    cartStore.setDate(this.selectedDate);
+    cartStore.setTheme(this.selectedTheme);
+    this.$router.push('/Personnalisation');
   }
+}
+
 };
 </script>
+
 
 <style scoped>
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background: url('/background.jpg') center/cover no-repeat;
+  background: url('/src/images/fond-papier.svg') center/cover no-repeat;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 1rem 2rem;
+background: #600D1D;
+color: white;
 }
 
 .header-left {
   display: flex;
+  align-items: center; 
+  gap: 10rem; 
+}
+
+.nav {
+  display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 10rem; 
+}
+
+.nav a {
+  text-decoration: none;
+  color: white;
 }
 
 .logo {
   height: 40px;
 }
-
-.nav a {
-  margin-right: 1rem;
-  text-decoration: none;
-  color: white;
-}
-
 .cart-icon {
   font-size: 1.5rem;
 }
@@ -180,10 +199,7 @@ body {
 }
 
 .image-container {
-  background: white;
-  padding: 1rem;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   width: 250px;
   height: auto;
 }
@@ -243,10 +259,10 @@ body {
 .custom-button {
   margin-top: 2rem;
   padding: 0.75rem;
-  background: #d62828;
+  background: #C04D55;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
