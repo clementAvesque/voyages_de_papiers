@@ -7,7 +7,7 @@
             <img src="../images/logo-white.svg" alt="" id="logo">
             <h2>Un simple journal...</h2>
             <h3>Non pas seulement, on personnalise <br>chaque expérience</h3>
-            <button>Créer votre journal</button>
+            <button  @click="goToArticle">Créer votre journal</button>
             <section id="explain">
                 <h2>La personnalisation en 3 étapes</h2>
                 <div id="rules">
@@ -30,13 +30,13 @@
                         <img src="../images/personnalisation.svg" alt="">
                     </div>
                 </div>
-                <button>Sélectionner les votres</button>
+                <button  @click="goToArticle">Sélectionner les votres</button>
 
             </section>
         </section>
         <section id="detail">
             <img src="../images/mockup.svg" alt="" id="mockup">
-            <button>Créer votre journal</button>
+            <button  @click="goToArticle">Créer votre journal</button>
             <div id="announce_game">
                 <div id="image"></div>
                 <div id="information">
@@ -107,6 +107,9 @@ export default {
             hoveredIndex = null
             this.hoveredIndex = null; // Réinitialise l'index lorsque la souris quitte
         },
+        goToArticle() {
+            this.$router.push('/Article');
+        }
     },
 };
 </script>
