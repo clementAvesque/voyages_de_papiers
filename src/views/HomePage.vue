@@ -188,13 +188,15 @@ export default {
 }
 
 #information #first {
-    font-size: 32pt;
+
+    font-size: clamp(1vw,2.96vw, 4vw);
     font-family: "Cormorant Garamond", serif;
     font-weight: bold;
 }
 
 #information p {
-    font-size: 24pt;
+    width: auto;
+    font-size: clamp(1vw,2.22vw, 4vw);
     font-family: "Lato", sans-serif;
     color: white;
     font-weight: 300;

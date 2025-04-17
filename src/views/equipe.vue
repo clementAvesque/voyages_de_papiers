@@ -66,7 +66,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 h3{
     font-family: "Cormorant Garamond", serif;
     font-size: 40pt;

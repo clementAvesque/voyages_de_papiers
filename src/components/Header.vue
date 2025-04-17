@@ -16,7 +16,7 @@ import { RouterLink } from 'vue-router';
   </header>
 </template>
 
-<style>
+<style scoped>
 
 .lato-black- {
     font-family: "Lato", sans-serif;
