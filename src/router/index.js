@@ -3,6 +3,7 @@ import Article from '/src/views/Article.vue'
 import Personnalisation from '/src/views/Personnalisation.vue'
 import Panier from '/src/views/Panier.vue'
 import Paiment from '/src/views/Paiment.vue'
+import FAQ  from '../views/FAQ.vue'
 
 import Home from '../views/HomePage.vue'
 import team from '../views/equipe.vue'
@@ -19,7 +20,6 @@ const routes = [
     component: Home
   },
   {
-
     path: '/team', 
     name: 'team',
     component: team
@@ -38,6 +38,11 @@ const routes = [
     path: '/Paiement', 
     name: 'Paiement',
     component: Paiment
+  },
+  {
+    path:'/FAQ',
+    name:'FAQ',
+    component: FAQ
   }
 ]
 

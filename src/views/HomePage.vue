@@ -179,9 +179,12 @@ export default {
 
 #demonstration {
     background-image: url("../images/background_mockup.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100vw;
 }
 
 #information #first {
