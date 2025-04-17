@@ -5,7 +5,7 @@ import Panier from '/src/views/Panier.vue'
 import Paiment from '/src/views/Paiment.vue'
 
 import Home from '../views/HomePage.vue'
-import FAQ from '../views/FAQ.vue'
+import team from '../views/equipe.vue'
 
 const routes = [
   {
@@ -20,9 +20,9 @@ const routes = [
   },
   {
 
-    path: '/FAQ', 
-    name: 'FAQ',
-    component: FAQ
+    path: '/team', 
+    name: 'team',
+    component: team
   },
   {
     path: '/Personnalisation', 
