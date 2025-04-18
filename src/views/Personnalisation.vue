@@ -1,19 +1,5 @@
 <template>
   <div>
-    <header class="header">
-      <div class="header-left">
-        <img src="/src/images/logo-white.svg" alt="Logo" />
-        <nav class="nav">
-          <a href="#">Accueil</a>
-          <a href="#">Votre journal</a>
-          <a href="#">Notre équipe</a>
-          <a href="#">FAQ</a>
-        </nav>
-      </div>
-      <div class="header-right">
-        <img src="/src/images/logo-panier.svg" alt="Panier" />
-      </div>
-    </header>
     <main class="main">
       <div class="left-panel">
         <button class="nav-arrow left" @click="prevImage"><img src="/src/images/fleche-gauche.svg" alt="fleche" /></button>

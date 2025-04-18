@@ -4,7 +4,11 @@ import Personnalisation from '/src/views/Personnalisation.vue'
 import Panier from '/src/views/Panier.vue'
 import Paiment from '/src/views/Paiment.vue'
 import Game from '/src/components/game.vue'; 
+import FAQ  from '../views/FAQ.vue'
+
+
 import Home from '../views/HomePage.vue'
+import team from '../views/equipe.vue'
 
 const routes = [
   {
@@ -16,6 +20,11 @@ const routes = [
     path: '/', 
     name: 'HomePage',
     component: Home
+  },
+  {
+    path: '/team', 
+    name: 'team',
+    component: team
   },
   {
     path: '/Personnalisation', 
@@ -31,11 +40,6 @@ const routes = [
     path: '/Paiement', 
     name: 'Paiement',
     component: Paiment
-  },
-  {
-    path: '/Game', 
-    name: 'Game',
-    component: Game
   }
 ]
 
