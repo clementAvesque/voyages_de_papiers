@@ -1,6 +1,6 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 </script>
 
 <template>
@@ -8,6 +8,7 @@ import Header from './components/Header.vue'
   <div>
     <router-view />
   </div>
+  <Footer/>
 </template>
 
 

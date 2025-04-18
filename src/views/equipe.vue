@@ -134,7 +134,7 @@ h2 {
 
 p {
     font-size: 24pt;
-    font-weight: 300;
+    font-weight: 400;
     width: 80vw;
     text-align: center;
     font-family: "Lato", sans-serif;
