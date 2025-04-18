@@ -3,12 +3,12 @@ import Article from '/src/views/Article.vue'
 import Personnalisation from '/src/views/Personnalisation.vue'
 import Panier from '/src/views/Panier.vue'
 import Paiment from '/src/views/Paiment.vue'
-
+import Game from '/src/components/game.vue'; 
 import Home from '../views/HomePage.vue'
 
 const routes = [
   {
-    path: '/article', // URL que tu veux, par ex. /article
+    path: '/article', 
     name: 'Article',
     component: Article
   },
@@ -31,6 +31,11 @@ const routes = [
     path: '/Paiement', 
     name: 'Paiement',
     component: Paiment
+  },
+  {
+    path: '/Game', 
+    name: 'Game',
+    component: Game
   }
 ]
 

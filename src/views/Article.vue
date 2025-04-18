@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { useCartStore } from '/src/stores/CartStore.js'; // adapte le chemin si besoin
+import { useCartStore } from '/src/stores/CartStore.js'; 
 
 export default {
   data() {

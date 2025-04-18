@@ -38,7 +38,16 @@
             <img src="../images/mockup.svg" alt="" id="mockup">
             <button  @click="goToArticle">Créer votre journal</button>
             <div id="announce_game">
-                <div id="image"></div>
+                <div id="image" @click="openGameModal"></div>
+            <div v-if="showGameModal" class="modal-overlay" @click.self="closeGameModal">
+                <div v-if="showGameModal" class="modal-overlay" @click.self="closeGameModal">
+                    <div class="modal-content">
+                        <button class="close-button" @click="closeGameModal">X</button>
+                        <Game />
+                    </div>
+                </div>
+            </div>
+
                 <div id="information">
                     <p id="first">Un petit détour dans le temps vous offre 10% de réduction : à vous de jouer !</p>
                     <p>Offre exclusive :<br>Les 100 premiers participants à notre jeu de memory remporteront 10% de
@@ -67,52 +76,57 @@
     </section>
 </template>
 <script>
-// Importez les images en haut du fichier
+// Import des images
 import firstImage from '../images/img_homepage/first_image.svg';
 import secondImage from '../images/img_homepage/second_image.svg';
 import thirdImage from '../images/img_homepage/third_image.svg';
 import fourthImage from '../images/img_homepage/fourth-image.svg';
+import Game from '/src/components/game.vue'; 
 
 export default {
-    data() {
-        return {
-            hoveredIndex: null, // Index de l'élément actuellement survolé
-            images: [
-                { src: firstImage, alt: 'First Image' },
-                { src: secondImage, alt: 'Second Image' },
-                { src: thirdImage, alt: 'Third Image' },
-                { src: fourthImage, alt: 'Fourth Image' },
-            ],
-            texts: [
-                { text: "Offrez un journal personnalisé pour un anniversaire inoubliable : une touche d’histoire, de souvenirs et de culture à partager !" },
-                { text: "Transformez chaque anniversaire en un voyage dans le temps avec un journal sur mesure, riche en anecdotes et en découvertes !" },
-                { text: "Célébrez en offrant un cadeau unique : un journal personnalisé qui mêle récits historiques, faits marquants et moments précieux !" },
-                { text: "Surprenez vos proches avec un journal personnalisé : une façon originale de revivre l’histoire et de créer des souvenirs impérissables !" }
-            ]
-        };
-
-       
+  components: {
+    Game,
+  },
+  data() {
+    return {
+      hoveredIndex: null, // Index de l'élément actuellement survolé
+      showGameModal: false, // Pour afficher/masquer la modale du jeu
+      images: [
+        { src: firstImage, alt: 'First Image' },
+        { src: secondImage, alt: 'Second Image' },
+        { src: thirdImage, alt: 'Third Image' },
+        { src: fourthImage, alt: 'Fourth Image' },
+      ],
+      texts: [
+        { text: "Offrez un journal personnalisé pour un anniversaire inoubliable : une touche d’histoire, de souvenirs et de culture à partager !" },
+        { text: "Transformez chaque anniversaire en un voyage dans le temps avec un journal sur mesure, riche en anecdotes et en découvertes !" },
+        { text: "Célébrez en offrant un cadeau unique : un journal personnalisé qui mêle récits historiques, faits marquants et moments précieux !" },
+        { text: "Surprenez vos proches avec un journal personnalisé : une façon originale de revivre l’histoire et de créer des souvenirs impérissables !" }
+      ]
+    };
+  },
+  methods: {
+    mouseHover(index) {
+      this.hoveredIndex = index;
+      document.getElementsByClassName("describe")[index].style.transform = "translateY(-200px)";
     },
-    methods: {
-        mouseHover(index) {
-            this.hoveredIndex = index;
-            document.getElementsByClassName("describe")[index].style.transform = "translateY(-200px)"
-            document.get
-            hoveredIndex = index
-
-        },
-        mouseout(index) {
-            this.hoveredIndex = index
-            document.getElementsByClassName("describe")[index].style.transform = "translateY(0px)"
-            hoveredIndex = null
-            this.hoveredIndex = null; // Réinitialise l'index lorsque la souris quitte
-        },
-        goToArticle() {
-            this.$router.push('/Article');
-        }
+    mouseout(index) {
+      document.getElementsByClassName("describe")[index].style.transform = "translateY(0px)";
+      this.hoveredIndex = null;
     },
+    goToArticle() {
+      this.$router.push('/Article');
+    },
+    openGameModal() {
+      this.showGameModal = true;
+    },
+    closeGameModal() {
+      this.showGameModal = false;
+    }
+  }
 };
 </script>
+
 
 <style scoped>
 
@@ -124,6 +138,41 @@ export default {
     font-weight: 300;
 
 }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* fond semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+
 .describe p {
     justify-self: end;
     font-size: 18pt;
