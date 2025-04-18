@@ -32,7 +32,7 @@ header{
     align-items: center;
     height: 20vh;
     background-color: rgba(66, 19, 24, 1);
-    font-size: 24pt;
+    font-size: 16pt;
     font-family: "Lato", sans-serif;
 }   
 header img{

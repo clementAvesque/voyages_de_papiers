@@ -173,10 +173,6 @@ export default {
     flex-shrink: 0;
 }
 
-
-
-
-
 #demonstration {
     background-image: url("../images/background_mockup.svg");
     background-repeat: no-repeat;
