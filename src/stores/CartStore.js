@@ -5,6 +5,7 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     date: '',
     theme: '',
+    journals : [],
   }),
   actions: {
     setDate(date) {

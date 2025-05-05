@@ -4,10 +4,9 @@
             <h1>
                 Voyage de Papier
             </h1>
-            <img src="../images/logo-white.svg" alt="" id="logo">
             <h2>Un simple journal...</h2>
             <h3>Non pas seulement, on personnalise <br>chaque expérience</h3>
-            <button  @click="goToArticle">Créer votre journal</button>
+            <button @click="goToArticle">Créer votre journal</button>
             <section id="explain">
                 <h2>La personnalisation en 3 étapes</h2>
                 <div id="rules">
@@ -30,23 +29,23 @@
                         <img src="../images/personnalisation.svg" alt="">
                     </div>
                 </div>
-                <button  @click="goToArticle">Sélectionner les votres</button>
+                <button @click="goToArticle">Sélectionner les votres</button>
 
             </section>
         </section>
         <section id="detail">
-            <img src="../images/mockup.svg" alt="" id="mockup">
-            <button  @click="goToArticle">Créer votre journal</button>
+            <div id="mockup">
+            </div>
             <div id="announce_game">
                 <div id="image" @click="openGameModal"></div>
-            <div v-if="showGameModal" class="modal-overlay" @click.self="closeGameModal">
                 <div v-if="showGameModal" class="modal-overlay" @click.self="closeGameModal">
-                    <div class="modal-content">
-                        <button class="close-button" @click="closeGameModal">X</button>
-                        <Game />
+                    <div v-if="showGameModal" class="modal-overlay" @click.self="closeGameModal">
+                        <div class="modal-content">
+                            <button class="close-button" @click="closeGameModal">X</button>
+                            <Game />
+                        </div>
                     </div>
                 </div>
-            </div>
 
                 <div id="information">
                     <p id="first">Un petit détour dans le temps vous offre 10% de réduction : à vous de jouer !</p>
@@ -58,12 +57,12 @@
         </section>
         <section id="demonstration">
             <h3>Pas qu’une simple lecture</h3>
-            <p id="presentation">Offrez un cadeau unique avec notre journal personnalisé : une plongée sur mesure dans l’histoire et les
+            <p id="presentation">Offrez un cadeau unique avec notre journal personnalisé : une plongée sur mesure dans
+                l’histoire et les
                 souvenirs de vos proches !</p>
 
             <div id="describes">
-                <div class="describe" v-for="(image, index) in images" :key="index"
-                    @mouseover="mouseHover(index)"
+                <div class="describe" v-for="(image, index) in images" :key="index" @mouseover="mouseHover(index)"
                     @mouseleave="mouseout(index)">
                     <img :src="image.src" :alt="image.alt" />
                     <p v-show="hoveredIndex === index">{{ texts[index].text }}</p>
@@ -81,56 +80,64 @@ import firstImage from '../images/img_homepage/first_image.svg';
 import secondImage from '../images/img_homepage/second_image.svg';
 import thirdImage from '../images/img_homepage/third_image.svg';
 import fourthImage from '../images/img_homepage/fourth-image.svg';
-import Game from '/src/components/game.vue'; 
+import Game from '/src/components/game.vue';
 
 export default {
-  components: {
-    Game,
-  },
-  data() {
-    return {
-      hoveredIndex: null, // Index de l'élément actuellement survolé
-      showGameModal: false, // Pour afficher/masquer la modale du jeu
-      images: [
-        { src: firstImage, alt: 'First Image' },
-        { src: secondImage, alt: 'Second Image' },
-        { src: thirdImage, alt: 'Third Image' },
-        { src: fourthImage, alt: 'Fourth Image' },
-      ],
-      texts: [
-        { text: "Offrez un journal personnalisé pour un anniversaire inoubliable : une touche d’histoire, de souvenirs et de culture à partager !" },
-        { text: "Transformez chaque anniversaire en un voyage dans le temps avec un journal sur mesure, riche en anecdotes et en découvertes !" },
-        { text: "Célébrez en offrant un cadeau unique : un journal personnalisé qui mêle récits historiques, faits marquants et moments précieux !" },
-        { text: "Surprenez vos proches avec un journal personnalisé : une façon originale de revivre l’histoire et de créer des souvenirs impérissables !" }
-      ]
-    };
-  },
-  methods: {
-    mouseHover(index) {
-      this.hoveredIndex = index;
-      document.getElementsByClassName("describe")[index].style.transform = "translateY(-200px)";
+    components: {
+        Game,
     },
-    mouseout(index) {
-      document.getElementsByClassName("describe")[index].style.transform = "translateY(0px)";
-      this.hoveredIndex = null;
+    data() {
+        return {
+            hoveredIndex: null, // Index de l'élément actuellement survolé
+            showGameModal: false, // Pour afficher/masquer la modale du jeu
+            images: [
+                { src: firstImage, alt: 'First Image' },
+                { src: secondImage, alt: 'Second Image' },
+                { src: thirdImage, alt: 'Third Image' },
+                { src: fourthImage, alt: 'Fourth Image' },
+            ],
+            texts: [
+                { text: "Offrez un journal personnalisé pour un anniversaire inoubliable : une touche d’histoire, de souvenirs et de culture à partager !" },
+                { text: "Transformez chaque anniversaire en un voyage dans le temps avec un journal sur mesure, riche en anecdotes et en découvertes !" },
+                { text: "Célébrez en offrant un cadeau unique : un journal personnalisé qui mêle récits historiques, faits marquants et moments précieux !" },
+                { text: "Surprenez vos proches avec un journal personnalisé : une façon originale de revivre l’histoire et de créer des souvenirs impérissables !" }
+            ]
+        };
     },
-    goToArticle() {
-      this.$router.push('/Article');
-    },
-    openGameModal() {
-      this.showGameModal = true;
-    },
-    closeGameModal() {
-      this.showGameModal = false;
+    methods: {
+        mouseHover(index) {
+            this.hoveredIndex = index;
+            document.getElementsByClassName("describe")[index].style.transform = "translateY(-200px)";
+        },
+        mouseout(index) {
+            document.getElementsByClassName("describe")[index].style.transform = "translateY(0px)";
+            this.hoveredIndex = null;
+        },
+        goToArticle() {
+            this.$router.push('/Article');
+        },
+        openGameModal() {
+            this.showGameModal = true;
+        },
+        closeGameModal() {
+            this.showGameModal = false;
+        }
     }
-  }
 };
 </script>
 
 
 <style scoped>
+#mockup {
+    background: url("../images/mockup.svg") no-repeat;
+    width: 1200px;
+    height: 803px;
+    aspect-ratio: 1200/803;
+    border: none;
+    margin-bottom: 0;
+}
 
-#presentation{
+#presentation {
     width: 70vw;
     font-size: 24pt;
     text-align: center;
@@ -138,38 +145,40 @@ export default {
     font-weight: 300;
 
 }
+
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5); /* fond semi-transparent */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    /* fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .modal-content {
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
-  max-width: 600px;
-  width: 90vw;
-  max-height: 90vh;
-  overflow: auto;
-  position: relative;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+    position: relative;
 }
 
 .close-button {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 24px;
-  border: none;
-  background: none;
-  cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 
@@ -234,14 +243,15 @@ export default {
 
 #information #first {
 
-    font-size: clamp(1vw,2.96vw, 4vw);
+    font-size: clamp(1vw, 2.96vw, 4vw);
     font-family: "Cormorant Garamond", serif;
+    margin-bottom: 50px;
     font-weight: bold;
 }
 
 #information p {
     width: auto;
-    font-size: clamp(1vw,2.22vw, 4vw);
+    font-size: clamp(1vw, 2.22vw, 4vw);
     font-family: "Lato", sans-serif;
     color: white;
     font-weight: 300;
@@ -258,12 +268,10 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-}
+    justify-content: center;}
 
 #announce_game {
     width: 100vw;
-    margin-top: 100px;
     height: 60vh;
     background-color: rgba(120, 40, 46, 1);
 
@@ -280,6 +288,7 @@ export default {
     background-image: url("../images/cards_game.svg");
     background-repeat: no-repeat;
     background-size: contain;
+
 }
 
 #announce_game #image:hover {

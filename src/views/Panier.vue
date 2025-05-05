@@ -22,29 +22,6 @@
         <button class="final-btn" @click="goToPayment">Finaliser la commande</button>
       </div>
     </main>
-    <footer class="footer">
-      <div class="footer-section">
-        <h2>Assistance</h2>
-        <ul>
-          <li><a href="#">Service-Client</a></li>
-          <li><a href="#">Aide</a></li>
-          <li><a href="#">Satisfait ou refait</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h2>Nous suivre</h2>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-logo">
-      <img src="/src/images/logo-white.svg" alt="Logo" />
-    </div>
-      <div class="footer-bottom">
-        VoyageDePapier.Com 2025 - Mentions légales - Conditions générales de vente - Politique de confidentialité
-      </div>
-    </footer>
   </div>
 </template>
   
