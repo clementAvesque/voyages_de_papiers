@@ -45,6 +45,11 @@ const routes = [
     path: '/Paiement', 
     name: 'Paiement',
     component: Paiment
+  },
+  {
+    path: '/FAQ', 
+    name: 'FAQ',
+    component: FAQ
   }
 ]
 

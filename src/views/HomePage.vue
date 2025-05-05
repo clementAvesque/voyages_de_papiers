@@ -6,7 +6,7 @@
             </h1>
             <h2>Un simple journal...</h2>
             <h3>Non pas seulement, on personnalise <br>chaque expérience</h3>
-            <button @click="goToArticle">Créer votre journal</button>
+            <button  @click="goToArticle">Créer votre journal</button>
             <section id="explain">
                 <h2>La personnalisation en 3 étapes</h2>
                 <div id="rules">
@@ -80,49 +80,49 @@ import firstImage from '../images/img_homepage/first_image.svg';
 import secondImage from '../images/img_homepage/second_image.svg';
 import thirdImage from '../images/img_homepage/third_image.svg';
 import fourthImage from '../images/img_homepage/fourth-image.svg';
-import Game from '/src/components/game.vue';
+import Game from '/src/components/game.vue'; 
 
 export default {
-    components: {
-        Game,
+  components: {
+    Game,
+  },
+  data() {
+    return {
+      hoveredIndex: null, // Index de l'élément actuellement survolé
+      showGameModal: false, // Pour afficher/masquer la modale du jeu
+      images: [
+        { src: firstImage, alt: 'First Image' },
+        { src: secondImage, alt: 'Second Image' },
+        { src: thirdImage, alt: 'Third Image' },
+        { src: fourthImage, alt: 'Fourth Image' },
+      ],
+      texts: [
+        { text: "Offrez un journal personnalisé pour un anniversaire inoubliable : une touche d’histoire, de souvenirs et de culture à partager !" },
+        { text: "Transformez chaque anniversaire en un voyage dans le temps avec un journal sur mesure, riche en anecdotes et en découvertes !" },
+        { text: "Célébrez en offrant un cadeau unique : un journal personnalisé qui mêle récits historiques, faits marquants et moments précieux !" },
+        { text: "Surprenez vos proches avec un journal personnalisé : une façon originale de revivre l’histoire et de créer des souvenirs impérissables !" }
+      ]
+    };
+  },
+  methods: {
+    mouseHover(index) {
+      this.hoveredIndex = index;
+      document.getElementsByClassName("describe")[index].style.transform = "translateY(-200px)";
     },
-    data() {
-        return {
-            hoveredIndex: null, // Index de l'élément actuellement survolé
-            showGameModal: false, // Pour afficher/masquer la modale du jeu
-            images: [
-                { src: firstImage, alt: 'First Image' },
-                { src: secondImage, alt: 'Second Image' },
-                { src: thirdImage, alt: 'Third Image' },
-                { src: fourthImage, alt: 'Fourth Image' },
-            ],
-            texts: [
-                { text: "Offrez un journal personnalisé pour un anniversaire inoubliable : une touche d’histoire, de souvenirs et de culture à partager !" },
-                { text: "Transformez chaque anniversaire en un voyage dans le temps avec un journal sur mesure, riche en anecdotes et en découvertes !" },
-                { text: "Célébrez en offrant un cadeau unique : un journal personnalisé qui mêle récits historiques, faits marquants et moments précieux !" },
-                { text: "Surprenez vos proches avec un journal personnalisé : une façon originale de revivre l’histoire et de créer des souvenirs impérissables !" }
-            ]
-        };
+    mouseout(index) {
+      document.getElementsByClassName("describe")[index].style.transform = "translateY(0px)";
+      this.hoveredIndex = null;
     },
-    methods: {
-        mouseHover(index) {
-            this.hoveredIndex = index;
-            document.getElementsByClassName("describe")[index].style.transform = "translateY(-200px)";
-        },
-        mouseout(index) {
-            document.getElementsByClassName("describe")[index].style.transform = "translateY(0px)";
-            this.hoveredIndex = null;
-        },
-        goToArticle() {
-            this.$router.push('/Article');
-        },
-        openGameModal() {
-            this.showGameModal = true;
-        },
-        closeGameModal() {
-            this.showGameModal = false;
-        }
+    goToArticle() {
+      this.$router.push('/Article');
+    },
+    openGameModal() {
+      this.showGameModal = true;
+    },
+    closeGameModal() {
+      this.showGameModal = false;
     }
+  }
 };
 </script>
 

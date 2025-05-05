@@ -10,6 +10,8 @@
             <h3>Nous suivre</h3>
             <p>Facebook</p>
             <p>Instagram</p>
+            <!-- <p>Twitter</p>
+            <p>Tik Tok</p> -->
         </div>
         <div id="logo_footer"><img src="../images/logo-white.svg" alt="logo"></div>
         <div id="sentence"><p>VoyageDePapier.Com 2025 - Mentions légales - Conditions générales de vente - Politique de confidentiolité</p></div>

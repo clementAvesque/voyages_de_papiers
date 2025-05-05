@@ -3,7 +3,6 @@
 
     <div class="container">
       <div class="left-side">
-        <img class="background-image" src="/src/images/fond-paiment.svg" alt="Background" />
         <div class="form-sections">
           <section class="payment">
             <h2>Mode de paiement</h2>
@@ -48,11 +47,11 @@
 
       <div class="right-side">
         <section class="summary">
-          <h2>Panier</h2>
           <div class="items">
             <div class="item" v-for="(item, index) in cartItems" :key="index">
               <img :src="item.image" alt="Article" />
               <div class="details">
+                <h2>Journal Souvenir Personnalisé</h2>
                 <p><strong>{{ item.theme }}</strong></p>
                 <p>Date : {{ item.date }}</p>
                 <p>Quantité : {{ item.quantity }}</p>
@@ -71,12 +70,9 @@
             <p>Livraison : {{ delivery.toFixed(2) }} €</p>
             <p><strong>Total : {{ total.toFixed(2) }} €</strong></p>
           </div>
-          <button class="pay-btn" @click="finaliserPaiement">confirmer</button>
         </section>
       </div>
     </div>
-
-    <!-- Popup de confirmation -->
     <div v-if="showConfirmationPopup" class="confirmation-popup">
       <div class="popup-content">
         <button @click="showConfirmationPopup = false" class="close-icon" aria-label="Fermer le popup">✕</button>
@@ -145,7 +141,6 @@ export default {
       }
     },
     finaliserPaiement() {
-      // Simuler un traitement, puis afficher le popup
       setTimeout(() => {
         this.showConfirmationPopup = true;
       }, 1000);
@@ -165,38 +160,18 @@ body, html {
   flex-direction: column;
   min-height: 100vh;
 }
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #600D1D;
-  color: white;
-}
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 10rem;
-}
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 10rem;
-}
-.nav a {
-  text-decoration: none;
-  color: white;
-}
 .container {
   display: flex;
   flex: 1;
   min-height: calc(100vh - 200px);
   overflow: hidden;
+  background-color: #8F3037;
+
 }
 .left-side {
   width: 50%;
   position: relative;
-  background-color: #600D1D;
+  background-color: #421318;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -289,6 +264,26 @@ body, html {
   cursor: pointer;
   margin-top: 1rem;
 }
+#promo {
+  border: 2px solid #A83941;
+  padding: 10px 15px;
+  border-radius: 8px;
+  outline: none;
+  color: #A83941;
+  font-size: 16px;
+  background-color: white;
+  transition: 0.3s;
+}
+
+#promo::placeholder {
+  color: #A83941;
+  opacity: 0.6;
+}
+
+#promo:focus {
+  box-shadow: 0 0 8px #A83941;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -324,8 +319,6 @@ body, html {
   width: 100%;
   margin-top: 1rem;
 }
-
-/* Style du popup */
 .confirmation-popup {
   position: fixed;
   top: 0;
