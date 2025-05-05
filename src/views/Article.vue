@@ -46,30 +46,6 @@
         
       </aside>
     </main>
-
-    <footer class="footer">
-      <div class="footer-section">
-        <h3>Assistance</h3>
-        <ul>
-          <li><a href="#">Service-Client</a></li>
-          <li><a href="#">Aide</a></li>
-          <li><a href="#">Satisfait au refait</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Nous suivre</h3>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">FaceBook</a></li>
-        </ul>
-      </div>
-      <div class="footer-logo">
-        <img src="/src/images/logo-white.svg" alt="Logo" />
-      </div>
-    </footer>
-    <div class="footer-bottom">
-      VoyageDePapier.Com 2025 - Mentions légales - Conditions générales de vente - Politique de confidentialité
-    </div>
   </div>
 </template>
 
@@ -135,38 +111,12 @@ methods: {
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background: url('/src/images/fond-papier.svg') center/cover no-repeat;
-}
-
-.header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 1rem 2rem;
-background: #600D1D;
-color: white;
-}
-
-.header-left {
-  display: flex;
-  align-items: center; 
-  gap: 10rem; 
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 10rem; 
-}
-
-.nav a {
-  text-decoration: none;
-  color: white;
 }
 
 .logo {
   height: 40px;
 }
+
 .cart-icon {
   font-size: 1.5rem;
 }
@@ -182,6 +132,7 @@ color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: url('/src/images/fond-papier.svg') center center / cover no-repeat;
 }
 
 .image-container {
@@ -216,7 +167,7 @@ color: white;
 
 .custom-panel {
   flex: 1;
-  background: #f3f1ee;
+  background: #421318;
   padding: 2rem;
   border-left: 1px solid #ddd;
   display: flex;
@@ -224,10 +175,13 @@ color: white;
   justify-content: flex-start;
   height: 100%;
   box-sizing: border-box;
+  color: white;
 }
 
-.custom-panel h2 {
-  margin-bottom: 1rem;
+.custom-panel h2,
+.custom-panel label,
+.custom-panel span {
+  color: white;
 }
 
 .custom-panel label {
@@ -238,8 +192,31 @@ color: white;
 
 .custom-panel select {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
   margin-top: 0.5rem;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  font-weight: 600;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='20,50 70,100 120,50' fill='none' stroke='white' stroke-width='15'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
+.custom-panel select option {
+  color: black;
+  background-color: white;
+}
+
+.custom-panel select:focus {
+  outline: none;
+  border-color: white;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 .custom-button {
@@ -290,14 +267,31 @@ color: white;
   padding: 0.5rem;
 }
 
+/* === Custom Select Thème === */
 .custom-select {
   position: relative;
   cursor: pointer;
-  border: 1px solid #ccc;
+  border: 1px solid white;
   padding: 0.5rem;
-  width: 200px;
-  background-color: #fff;
-  border-radius: 5px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 4px;
+  color: white;
+  font-weight: 600;
+}
+
+.custom-select::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .dropdown-menu {
@@ -305,21 +299,29 @@ color: white;
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #fff;
+  background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
   max-height: 200px;
   overflow-y: auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 2px; 
+  gap: 4px; 
+  z-index: 1000;
 }
 
 .dropdown-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%; 
+  width: 30%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
 }
 
 .dropdown-item img {
@@ -330,6 +332,8 @@ color: white;
 
 .dropdown-item span {
   text-align: center;
+  color: black;
 }
+
 
 </style>

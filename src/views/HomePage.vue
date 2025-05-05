@@ -7,6 +7,7 @@
             <img src="../images/logo-white.svg" alt="" id="logo">
             <h2>Un simple journal...</h2>
             <h3>Non pas seulement, on personnalise <br>chaque expérience</h3>
+        <Button text="Toto" to="/Article"></Button>
             <button  @click="goToArticle">Créer votre journal</button>
             <section id="explain">
                 <h2>La personnalisation en 3 étapes</h2>
@@ -82,10 +83,13 @@ import secondImage from '../images/img_homepage/second_image.svg';
 import thirdImage from '../images/img_homepage/third_image.svg';
 import fourthImage from '../images/img_homepage/fourth-image.svg';
 import Game from '/src/components/game.vue'; 
+import Button from '/src/components/button.vue'; 
+
 
 export default {
   components: {
     Game,
+    Button,
   },
   data() {
     return {

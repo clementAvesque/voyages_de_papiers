@@ -1,12 +1,11 @@
 <template>
   <div class="container">
-
     <main class="main">
       <h1>Votre Panier</h1>
       <div class="cart">
         <div class="cart-item" v-for="(item, index) in cartItems" :key="index">
           <div class="item-info">
-            <img :src="item.image" alt="Logo" />
+            <img :src="item.image || '/src/images/logo-white.svg'" alt="Logo" />
             <div class="text">
               <p><strong>Date :</strong> {{ item.date }}</p>
               <p><strong>Thème :</strong> {{ item.theme }}</p>
@@ -15,39 +14,16 @@
           </div>
           <div class="item-actions">
             <input type="number" v-model.number="item.quantity" min="1" />
-            <button @click="goToModifyPage(index)">Modifier</button>
-            <button @click="removeItem(index)">Supprimer</button>
+            <RouterLink to="/Article" style="text-decoration: none; color: black;font-size: 1.1rem;">Modifier</RouterLink>
+            <button @click="removeItem(index)" style="background: none; border: none; padding: 0; margin: 0; color: black; cursor: pointer; text-decoration: none; font-size: 1.1rem;   font-family: Georgia, serif;">Supprimer</button>
           </div>
         </div>
         <button class="final-btn" @click="goToPayment">Finaliser la commande</button>
       </div>
     </main>
-    <footer class="footer">
-      <div class="footer-section">
-        <h2>Assistance</h2>
-        <ul>
-          <li><a href="#">Service-Client</a></li>
-          <li><a href="#">Aide</a></li>
-          <li><a href="#">Satisfait ou refait</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h2>Nous suivre</h2>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-logo">
-      <img src="/src/images/logo-white.svg" alt="Logo" />
-    </div>
-      <div class="footer-bottom">
-        VoyageDePapier.Com 2025 - Mentions légales - Conditions générales de vente - Politique de confidentialité
-      </div>
-    </footer>
   </div>
 </template>
-  
+
 <script setup>
 import { useCartStore } from '/src/stores/CartStore.js';
 import { ref } from 'vue';
@@ -55,26 +31,25 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const cartStore = useCartStore();
+
 const cartItems = ref([
-{ 
-  image: '/src/images/logo-white.svg', 
-  date: cartStore.date, 
-  theme: cartStore.theme, 
-  quantity: 1 
-}
+  { 
+    image: cartStore.image || '/src/images/logo-white.svg', 
+    date: cartStore.date, 
+    theme: cartStore.theme, 
+    quantity: 1 
+  }
 ]);
-  function removeItem(index) {
+
+function removeItem(index) {
   cartItems.value.splice(index, 1);
 }
-  function goToModifyPage(index) {
-  router.push({ name: 'PaiementPage', params: { article: JSON.stringify(cartItems.value[index]) } });
-}
-  function goToPayment() {
+
+function goToPayment() {
   router.push({ name: 'Paiement', query: { articles: JSON.stringify(cartItems.value) } });
 }
 </script>
-  
-  
+
 <style scoped>
 .container {
   font-family: Georgia, serif;
@@ -87,12 +62,12 @@ const cartItems = ref([
 }
 
 .header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 1rem 2rem;
-background: #600D1D;
-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #600D1D;
+  color: white;
 }
 
 .header-left {
@@ -115,6 +90,7 @@ color: white;
 .logo {
   height: 40px;
 }
+
 .main {
   flex: 1;
   padding: 2rem;
@@ -126,12 +102,13 @@ color: white;
 .main h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
+  color: #ffffff;
 }
 
 .cart {
   width: 100%;
   max-width: 800px;
-  background: rgba(255, 255, 255, 0.75);
+  background: #ffffff;
   padding: 2rem;
   border-radius: 1.5rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
