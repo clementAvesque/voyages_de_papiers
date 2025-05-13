@@ -110,6 +110,8 @@ export default {
   border: none;
   cursor: pointer;
   transition: transform 0.3s ease;
+  
+    border-radius: 5px;
 }
 
 .flipped {
