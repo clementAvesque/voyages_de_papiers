@@ -2,9 +2,10 @@ import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    date: '',
-    theme: '',
-    image: '', // Image pour le panier
+    date: null,
+    theme: null,
+    image: null,
+    texte: '' 
   }),
   actions: {
     setDate(date) {
@@ -14,7 +15,10 @@ export const useCartStore = defineStore('cart', {
       this.theme = theme;
     },
     setImage(image) {
-      this.image = image; // Mise à jour de l'image dans le store
+      this.image = image;
     },
-  },
+    setTexte(texte) {
+      this.texte = texte;
+    }
+  }
 });

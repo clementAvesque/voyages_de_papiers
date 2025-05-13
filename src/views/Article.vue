@@ -54,57 +54,83 @@ import { useCartStore } from '/src/stores/CartStore.js';
 
 export default {
   data() {
-  return {
-    selectedDate: 'Sélectionner une option...',
-    selectedTheme: 'Sélectionner une option...',
-    dropdownVisible: false,
-    currentImage: 0,
-    images: [
-      'src/images/journal1.svg',
-      'src/images/journal2.svg',
-      'src/images/journal3.svg',
-      'src/images/journal4.svg'
-    ],
-    themeImages: [
-      { src: '/src/images/1.svg', title: 'Gastronomie' },
-      { src: '/src/images/2.svg', title: 'Culture et Art' },
-      { src: '/src/images/3.svg', title: 'Mode' },
-      { src: '/src/images/4.svg', title: 'Voyage' },
-      { src: '/src/images/5.svg', title: 'Article Numérique' },
-      { src: '/src/images/6.svg', title: 'Série et Film' },
-      { src: '/src/images/7.svg', title: 'People' },
-      { src: '/src/images/8.svg', title: 'Autmobile' },
-      { src: '/src/images/9.svg', title: 'Sport' },
-      { src: '/src/images/10.svg', title: 'Fait Divers' },
-      { src: '/src/images/11.svg', title: 'Politique' }
-    ]
-  };
-},
+    return {
+      selectedDate: 'Sélectionner une option...',
+      selectedTheme: 'Sélectionner une option...',
+      dropdownVisible: false,
+      currentImage: 0,
+      defaultImages: [
+        'src/images/journal1.svg',
+        'src/images/journal2.svg',
+        'src/images/journal3.svg',
+        'src/images/journal4.svg'
+      ],
+      autoImages2005: [
+        'src/images/auto2006-1.svg',
+        'src/images/auto2006-2.svg',
+        'src/images/auto2006-3.svg',
+        'src/images/auto2006-4.svg'
+      ],
+      themeImages: [
+        { src: '/src/images/1.svg', title: 'Gastronomie' },
+        { src: '/src/images/2.svg', title: 'Culture et Art' },
+        { src: '/src/images/3.svg', title: 'Mode' },
+        { src: '/src/images/4.svg', title: 'Voyage' },
+        { src: '/src/images/5.svg', title: 'Article Numérique' },
+        { src: '/src/images/6.svg', title: 'Série et Film' },
+        { src: '/src/images/7.svg', title: 'People' },
+        { src: '/src/images/8.svg', title: 'Automobile' },
+        { src: '/src/images/9.svg', title: 'Sport' },
+        { src: '/src/images/10.svg', title: 'Fait Divers' },
+        { src: '/src/images/11.svg', title: 'Politique' }
+      ]
+    };
+  },
 
-methods: {
-  nextImage() {
-    this.currentImage = (this.currentImage + 1) % this.images.length;
+  computed: {
+    images() {
+      if (this.selectedDate === '2006' && this.selectedTheme === 'Automobile') {
+        return this.autoImages2005;
+      }
+      return this.defaultImages;
+    }
   },
-  prevImage() {
-    this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
+
+  methods: {
+    nextImage() {
+      if (this.images.length > 0) {
+        this.currentImage = (this.currentImage + 1) % this.images.length;
+      }
+    },
+    prevImage() {
+      if (this.images.length > 0) {
+        this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
+      }
+    },
+    toggleDropdown() {
+      this.dropdownVisible = !this.dropdownVisible;
+    },
+    selectTheme(theme) {
+      this.selectedTheme = theme.title;
+      this.dropdownVisible = false;
+      this.currentImage = 0;
+    },
+    goToPersonnalisation() {
+      const cartStore = useCartStore();
+      cartStore.setDate(this.selectedDate);
+      cartStore.setTheme(this.selectedTheme);
+      this.$router.push('/Personnalisation');
+    }
   },
-  toggleDropdown() {
-    this.dropdownVisible = !this.dropdownVisible;
-  },
-  selectTheme(theme) {
-    this.selectedTheme = theme.title;
-    this.dropdownVisible = false;
-  },
-  goToPersonnalisation() {
-    const cartStore = useCartStore();
-    cartStore.setDate(this.selectedDate);
-    cartStore.setTheme(this.selectedTheme);
-    this.$router.push('/Personnalisation');
+
+  watch: {
+    selectedDate() {
+      this.currentImage = 0;
+    }
   }
-}
-
 };
 </script>
+
 
 
 <style scoped>

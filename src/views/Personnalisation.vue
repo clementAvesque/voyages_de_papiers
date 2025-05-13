@@ -2,28 +2,42 @@
   <div>
     <main class="main">
       <div class="left-panel">
-        <button class="nav-arrow left" @click="prevImage"><img src="/src/images/fleche-gauche.svg" alt="fleche" /></button>
+        <button class="nav-arrow left" @click="prevImage">
+          <img src="/src/images/fleche-gauche.svg" alt="fleche" />
+        </button>
         <div class="image-container">
           <img :src="images[currentImage]" alt="Journal" class="journal-image" />
         </div>
-        <button class="nav-arrow right" @click="nextImage"><img src="/src/images/fleche-droite.svg" alt="fleche" /></button>
+        <button class="nav-arrow right" @click="nextImage">
+          <img src="/src/images/fleche-droite.svg" alt="fleche" />
+        </button>
       </div>
 
       <aside class="custom-panel">
         <h2>Personnaliser ...</h2>
         <div>
           <label for="message">Votre Texte</label>
-          <textarea id="message" name="message" placeholder="écrire ici..." required></textarea>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="écrire ici..."
+            required
+            v-model="texte"
+          ></textarea>
         </div>
 
         <label for="image">Votre Image</label>
         <form>
           <div class="file-input-wrapper">
             <input type="file" name="image" id="image" accept="image/*" required @change="handleImageUpload">
-            <img src="/src/images/photo.svg" alt="Cliquez ici pour télécharger une image" @click="triggerFileInput">
+            <img
+              v-if="!imagePreview"
+              src="/src/images/photo.svg"
+              alt="Cliquez ici pour télécharger une image"
+              @click="triggerFileInput"
+            />
           </div>
           <img v-if="imagePreview" :src="imagePreview" alt="Aperçu" class="image-preview" />
-          <br><br>
         </form>
 
         <button class="custom-button" @click="goToPanier">Continuer vers l'achat</button>
@@ -40,27 +54,13 @@ export default {
     return {
       currentImage: 0,
       images: [
-        'src/images/journal1.svg',
-        'src/images/journal2.svg',
-        'src/images/journal3.svg',
-        'src/images/journal4.svg'
+        'src/images/auto2006-1.svg',
+        'src/images/auto2006-2.svg',
+        'src/images/auto2006-3.svg',
+        'src/images/auto2006-4.svg'
       ],
       imagePreview: null,
-      selectedTheme: 'Sélectionner une option...',
-      dropdownVisible: false,
-      themeImages: [
-        '/src/images/1.svg',
-        '/src/images/2.svg',
-        '/src/images/3.svg',
-        '/src/images/4.svg',
-        '/src/images/5.svg',
-        '/src/images/6.svg',
-        '/src/images/7.svg',
-        '/src/images/8.svg',
-        '/src/images/9.svg',
-        '/src/images/10.svg',
-        '/src/images/11.svg',
-      ]
+      texte: ''
     };
   },
   methods: {
@@ -70,22 +70,16 @@ export default {
     prevImage() {
       this.currentImage = (this.currentImage - 1 + this.images.length) % this.images.length;
     },
-    toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible;
-    },
-    selectTheme(image) {
-      this.selectedTheme = image;
-      this.dropdownVisible = false;
-    },
     goToPanier() {
+      const cartStore = useCartStore();
+      cartStore.setImage(this.imagePreview);
+      cartStore.setTexte(this.texte);
       this.$router.push('/Panier');
     },
     handleImageUpload(event) {
       const file = event.target.files[0];
       if (file) {
         this.imagePreview = URL.createObjectURL(file);
-        const cartStore = useCartStore(); // Accès au store
-        cartStore.setImage(this.imagePreview); // Mise à jour de l'image dans le store
       }
     },
     triggerFileInput() {
@@ -94,8 +88,6 @@ export default {
   }
 };
 </script>
-
-
 
 <style scoped>
 body {

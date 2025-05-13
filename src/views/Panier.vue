@@ -9,13 +9,13 @@
             <div class="text">
               <p><strong>Date :</strong> {{ item.date }}</p>
               <p><strong>Thème :</strong> {{ item.theme }}</p>
-              <p><strong>Texte :</strong> <span class="recap">Récapitulatif</span></p>
+              <p><strong>Texte :</strong> <span class="recap">{{ item.texte }}</span></p>
             </div>
           </div>
           <div class="item-actions">
             <input type="number" v-model.number="item.quantity" min="1" />
-            <RouterLink to="/Article" style="text-decoration: none; color: black;font-size: 1.1rem;">Modifier</RouterLink>
-            <button @click="removeItem(index)" style="background: none; border: none; padding: 0; margin: 0; color: black; cursor: pointer; text-decoration: none; font-size: 1.1rem;   font-family: Georgia, serif;">Supprimer</button>
+            <RouterLink to="/Article">Modifier</RouterLink>
+            <button @click="removeItem(index)">Supprimer</button>
           </div>
         </div>
         <button class="final-btn" @click="goToPayment">Finaliser la commande</button>
@@ -33,11 +33,12 @@ const router = useRouter();
 const cartStore = useCartStore();
 
 const cartItems = ref([
-  { 
-    image: cartStore.image || '/src/images/logo-white.svg', 
-    date: cartStore.date, 
-    theme: cartStore.theme, 
-    quantity: 1 
+  {
+    image: cartStore.image || '/src/images/logo-white.svg',
+    date: cartStore.date,
+    theme: cartStore.theme,
+    texte: cartStore.texte,
+    quantity: 1
   }
 ]);
 
@@ -49,7 +50,6 @@ function goToPayment() {
   router.push({ name: 'Paiement', query: { articles: JSON.stringify(cartItems.value) } });
 }
 </script>
-
 <style scoped>
 .container {
   font-family: Georgia, serif;

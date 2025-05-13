@@ -41,6 +41,7 @@
             </div>
           </section>
 
+          <button class="finalize-btn" @click="finaliserPaiement">Confirmer les informations</button>
         </div>
       </div>
 
@@ -72,6 +73,7 @@
         </section>
       </div>
     </div>
+
     <div v-if="showConfirmationPopup" class="confirmation-popup">
       <div class="popup-content">
         <button @click="showConfirmationPopup = false" class="close-icon" aria-label="Fermer le popup">✕</button>
@@ -132,13 +134,6 @@ export default {
     }
   },
   methods: {
-    applyPromo() {
-      if (this.promoCode === 'Journal10') {
-        alert('Code promo appliqué avec succès!');
-      } else {
-        alert('Code promo invalide');
-      }
-    },
     finaliserPaiement() {
       setTimeout(() => {
         this.showConfirmationPopup = true;
@@ -165,39 +160,31 @@ body, html {
   min-height: calc(100vh - 200px);
   overflow: hidden;
   background-color: #8F3037;
-
 }
 .left-side {
   width: 50%;
-  position: relative;
   background-color: #421318;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
 }
-.background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
 .form-sections {
-  position: relative;
   z-index: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  align-items: center;
 }
 .payment, .contact {
-  background-color: #600D1D;
+  background-color: #8F3037;
   color: white;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 1rem;
+  width: 60%;
+  max-height: 50%;
+  overflow-y: auto;
 }
 .input-group {
   display: flex;
@@ -214,13 +201,14 @@ body, html {
   gap: 1rem;
 }
 .finalize-btn {
-  background-color: #421318;
+  background-color: #8F3037;
   color: #ffffff;
   padding: 0.75rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  width: 90%;
 }
 .right-side {
   width: 50%;
@@ -253,16 +241,6 @@ body, html {
 .totals {
   margin-top: 1rem;
 }
-.pay-btn {
-  background-color: #A41D36;
-  color: white;
-  padding: 0.75rem;
-  border: none;
-  width: 100%;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
 #promo {
   border: 2px solid #A83941;
   padding: 10px 15px;
@@ -273,50 +251,12 @@ body, html {
   background-color: white;
   transition: 0.3s;
 }
-
 #promo::placeholder {
   color: #A83941;
   opacity: 0.6;
 }
-
 #promo:focus {
   box-shadow: 0 0 8px #A83941;
-}
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  background: #4a1212;
-  color: white;
-  padding: 2rem;
-  flex-wrap: wrap;
-}
-.footer-section {
-  flex: 1;
-  min-width: 150px;
-}
-.footer-section h2 {
-  margin-bottom: 0.5rem;
-}
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-.footer-section li {
-  margin-bottom: 0.25rem;
-}
-.footer-section a {
-  color: white;
-  text-decoration: none;
-}
-.footer-bottom {
-  text-align: center;
-  background: #4a1212;
-  color: white;
-  font-size: 0.75rem;
-  padding: 0.5rem;
-  width: 100%;
-  margin-top: 1rem;
 }
 .confirmation-popup {
   position: fixed;
@@ -339,7 +279,6 @@ body, html {
   border-radius: 1rem;
   text-align: center;
 }
-
 .close-icon {
   position: absolute;
   top: 1rem;
@@ -350,7 +289,6 @@ body, html {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
 .popup-content ul {
   text-align: left;
   margin-top: 1rem;
@@ -365,6 +303,4 @@ body, html {
   margin-top: 1rem;
   cursor: pointer;
 }
-
-
 </style>
