@@ -229,18 +229,22 @@ body, html {
   gap: 1rem;
 }
 .item img {
-  width: 50px;
-  height: 50px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
+  border-radius: 10%;
+  margin-top: 4.5rem;
 }
 .details {
   flex: 1;
+  font-size: larger;
 }
 .promo {
-  margin-top: 1rem;
+  margin-top: 4rem;
 }
 .totals {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  font-size: large;
 }
 #promo {
   border: 2px solid #A83941;

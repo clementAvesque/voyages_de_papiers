@@ -14,8 +14,8 @@
           </div>
           <div class="item-actions">
             <input type="number" v-model.number="item.quantity" min="1" />
-            <RouterLink to="/Article">Modifier</RouterLink>
-            <button @click="removeItem(index)">Supprimer</button>
+            <RouterLink class="bouton" to="/Article">Modifier</RouterLink>
+            <button class="supprimer" @click="removeItem(index)">Supprimer</button>
           </div>
         </div>
         <button class="final-btn" @click="goToPayment">Finaliser la commande</button>
@@ -59,6 +59,22 @@ function goToPayment() {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+.bouton {
+  font-family: Georgia, serif;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+.supprimer {
+    font-family: Georgia, serif;
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.1rem;
 }
 
 .header {

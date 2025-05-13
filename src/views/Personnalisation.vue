@@ -145,14 +145,12 @@ body {
 }
 
 .image-container {
-  border-radius: 10px;
-  width: 250px;
+  width: 350px;
   height: auto;
 }
 
 .journal-image {
   width: 100%;
-  border-radius: 10px;
 }
 
 .nav-arrow {
