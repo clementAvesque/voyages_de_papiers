@@ -36,16 +36,11 @@
         <section id="detail">
             <div id="mockup">
             </div>
+            <div></div>
             <div id="announce_game">
-                <div id="image" @click="openGameModal"></div>
-                <div v-if="showGameModal" class="modal-overlay" @click.self="closeGameModal">
-                    <div v-if="showGameModal" class="modal-overlay" @click.self="closeGameModal">
-                        <div class="modal-content">
-                            <button class="close-button" @click="closeGameModal">X</button>
-                            <Game />
-                        </div>
-                    </div>
-                </div>
+                <div v-show="game" id="game"> <Game/></div>
+                <div id="image" @click="toggle_game"></div>
+                
 
                 <div id="information">
                     <p id="first">Un petit détour dans le temps vous offre 10% de réduction : à vous de jouer !</p>
@@ -88,6 +83,7 @@ export default {
   },
   data() {
     return {
+      game: false,
       hoveredIndex: null, // Index de l'élément actuellement survolé
       showGameModal: false, // Pour afficher/masquer la modale du jeu
       images: [
@@ -105,6 +101,16 @@ export default {
     };
   },
   methods: {
+    toggle_game(){
+        this.game = !this.game
+        if(this.game === true){
+        document.getElementById("image").style.display= "none"
+        document.getElementById("information").style.display = "none"
+    }else{
+                document.getElementById("image").style.display= "block"
+        document.getElementById("information").style.display = "flex"
+    }
+    },
     mouseHover(index) {
       this.hoveredIndex = index;
       document.getElementsByClassName("describe")[index].style.transform = "translateY(-200px)";
@@ -144,6 +150,12 @@ export default {
     font-family: "Lato", sans-serif;
     font-weight: 300;
 
+}
+
+#game button{
+  background-image: url(../images/img_game/back_cards.svg);
+  width: 10vw;
+  height: 10vw;
 }
 
 .modal-overlay {
