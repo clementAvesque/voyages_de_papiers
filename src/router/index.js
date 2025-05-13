@@ -12,6 +12,11 @@ import team from '../views/equipe.vue'
 
 const routes = [
   {
+    path: '/FAQ', 
+    name: 'FAQ',
+    component: FAQ
+  },
+  {
     path: '/article', 
     name: 'Article',
     component: Article

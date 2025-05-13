@@ -30,13 +30,13 @@ header{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    height: 20vh;
+    height: 10vh;
     background-color: rgba(66, 19, 24, 1);
     font-size: 16pt;
     font-family: "Lato", sans-serif;
 }   
 header img{
-    height: 10vh;
+    height: 5vh;
 }
 
 </style>

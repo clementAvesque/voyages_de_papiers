@@ -2,10 +2,9 @@ import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    date: null,
-    theme: null,
-    image: null,
-    texte: '' 
+    date: '',
+    theme: '',
+    image: '', // Image pour le panier
   }),
   actions: {
     setDate(date) {
