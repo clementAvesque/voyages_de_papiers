@@ -7,7 +7,7 @@ import backCards from '../images/img_game/back_cards.svg';
 
 export default {
   mounted() {
-    this.creategame(4)
+    this.creategame(5)
   },
   methods: {
     creategame(numb_of_pair) {
