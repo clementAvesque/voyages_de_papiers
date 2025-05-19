@@ -119,8 +119,7 @@ export default {
 #game {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
-  padding: 0 10%;
+  padding-left: 5vw;
   gap: 70px;
   transition: all 0.5s;
 }
