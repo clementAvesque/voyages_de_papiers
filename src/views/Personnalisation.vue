@@ -1,4 +1,8 @@
 <template>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  
   <div>
     <main class="main">
       <div class="left-panel">
@@ -16,22 +20,23 @@
       <aside class="custom-panel">
         <h2>Personnaliser ...</h2>
         <div>
-          <label for="message">Votre Texte</label>
+          <label for="message">Votre Texte*</label>
           <textarea
             id="message"
             name="message"
-            placeholder="écrire ici..."
+            placeholder="écrire ici... : Joyeux anniversaire, Mamie ! Merci pour toutes ces douceurs que seul ton cœur sait offrir : tes histoires racontées au coin du feu, tes plats réconfortants, ton rire qui berce nos souvenirs d’enfance."
             required
             v-model="texte"
           ></textarea>
         </div>
 
-        <label for="image">Votre Image</label>
+        <label for="image">Votre Image*</label>
         <form>
           <div class="file-input-wrapper">
             <input type="file" name="image" id="image" accept="image/*" required @change="handleImageUpload">
             <img
               v-if="!imagePreview"
+              class="image-preview"
               src="/src/images/photo.svg"
               alt="Cliquez ici pour télécharger une image"
               @click="triggerFileInput"
@@ -40,9 +45,47 @@
           <img v-if="imagePreview" :src="imagePreview" alt="Aperçu" class="image-preview" />
         </form>
 
-        <button class="custom-button" @click="goToPanier">Continuer vers l'achat</button>
+        <!-- Sélecteur IA conditionnel -->
+        <div v-if="imagePreview && texte" class="ia-selection">
+          <label for="aideIA">Aidez-vous de l'IA</label>
+          <select id="aideIA" v-model="aideIA">
+            <option disabled value="">Choisissez</option>
+            <option value="non">Non</option>
+            <option value="oui">Oui</option>
+          </select>
+        </div>
+        <div><p>*Obligatoire pour passer à la suite</p></div>
+        <button v-if="aideIA === 'non'" class="custom-button" @click="goToPanier">
+          Confirmer l'achat
+        </button>
       </aside>
     </main>
+
+    <!-- POPUP -->
+    <div v-if="showPopup" class="popup-overlay">
+      <div class="popup">
+        <button class="close-button" @click="closePopup">×</button>
+        <h3>Choisissez une option</h3>
+
+        <label for="choixIA">Choix</label>
+        <select id="choixIA" v-model="choixIA">
+          <option disabled value="">Choisissez</option>
+          <option value="poeme">Poème</option>
+          <option value="histoire">Courte histoire</option>
+        </select>
+
+        <label for="idee">Expliquez votre idée</label>
+        <textarea
+          id="idee"
+          v-model="ideeIA"
+          placeholder="Décrivez votre idée ici..."
+        ></textarea>
+
+        <button class="custom-button" @click="goToPanier">
+          Finaliser la préparation
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -60,8 +103,17 @@ export default {
         'src/images/auto2006-4.svg'
       ],
       imagePreview: null,
-      texte: ''
+      texte: '',
+      aideIA: '',
+      choixIA: '',
+      ideeIA: '',
+      showPopup: false
     };
+  },
+  watch: {
+    aideIA(newValue) {
+      this.showPopup = newValue === 'oui';
+    }
   },
   methods: {
     nextImage() {
@@ -74,6 +126,9 @@ export default {
       const cartStore = useCartStore();
       cartStore.setImage(this.imagePreview);
       cartStore.setTexte(this.texte);
+      cartStore.setAideIA?.(this.aideIA);
+      cartStore.setChoixIA?.(this.choixIA);
+      cartStore.setIdeeIA?.(this.ideeIA);
       this.$router.push('/Panier');
     },
     handleImageUpload(event) {
@@ -84,6 +139,10 @@ export default {
     },
     triggerFileInput() {
       document.getElementById('image').click();
+    },
+    closePopup() {
+      this.showPopup = false;
+      this.aideIA = '';
     }
   }
 };
@@ -91,8 +150,10 @@ export default {
 
 <style scoped>
 body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   margin: 0;
-  font-family: 'Arial', sans-serif;
   background: url('/src/images/fond-papier.svg') center/cover no-repeat;
 }
 
@@ -190,10 +251,26 @@ body {
   color: white;
 }
 
+.custom-panel h2 {
+  font-size: 1.5rem;
+}
+
 .custom-panel label {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  margin-bottom: 1rem;
+  font-size: 1rem;
   display: block;
   margin-top: 1rem;
   font-weight: 600;
+}
+
+p {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
 }
 
 textarea {
@@ -201,6 +278,7 @@ textarea {
   padding: 0.5rem;
   margin-top: 0.5rem;
   border-radius: 5px;
+  height: 100px;
   border: 1px solid #ccc;
   resize: vertical;
 }
@@ -234,5 +312,58 @@ textarea {
   margin-top: 1rem;
   max-width: 100%;
   border-radius: 10px;
+  height: 150px;
+  width: 150px;
+  align-items: center;
+}
+
+.ia-selection {
+  margin-top: 2rem;
+}
+
+.popup-overlay {
+  position: fixed;
+  top:65px;
+  right: 0;
+  width: 28%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.popup {
+  position: relative;
+  background: #421318;
+  color: white;
+  padding: 2rem;
+  width: 90%;
+  height: 90%; 
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.popup select,
+.popup textarea {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
 }
 </style>
