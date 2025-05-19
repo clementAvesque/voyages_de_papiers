@@ -1,7 +1,8 @@
 <template>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  
   <div>
     <main class="main">
       <div class="left-panel">
@@ -54,16 +55,16 @@
           </select>
         </div>
         <div><p>*Obligatoire pour passer à la suite</p></div>
-        <!-- Bouton si NON -->
         <button v-if="aideIA === 'non'" class="custom-button" @click="goToPanier">
           Confirmer l'achat
         </button>
       </aside>
     </main>
 
-    <!-- Popup IA si OUI -->
-    <div v-if="aideIA === 'oui'" class="popup-overlay">
+    <!-- POPUP -->
+    <div v-if="showPopup" class="popup-overlay">
       <div class="popup">
+        <button class="close-button" @click="closePopup">×</button>
         <h3>Choisissez une option</h3>
 
         <label for="choixIA">Choix</label>
@@ -105,8 +106,14 @@ export default {
       texte: '',
       aideIA: '',
       choixIA: '',
-      ideeIA: ''
+      ideeIA: '',
+      showPopup: false
     };
+  },
+  watch: {
+    aideIA(newValue) {
+      this.showPopup = newValue === 'oui';
+    }
   },
   methods: {
     nextImage() {
@@ -119,9 +126,9 @@ export default {
       const cartStore = useCartStore();
       cartStore.setImage(this.imagePreview);
       cartStore.setTexte(this.texte);
-      cartStore.setAideIA?.(this.aideIA);     // Si méthode existe
-      cartStore.setChoixIA?.(this.choixIA);   // Facultatif
-      cartStore.setIdeeIA?.(this.ideeIA);     // Facultatif
+      cartStore.setAideIA?.(this.aideIA);
+      cartStore.setChoixIA?.(this.choixIA);
+      cartStore.setIdeeIA?.(this.ideeIA);
       this.$router.push('/Panier');
     },
     handleImageUpload(event) {
@@ -132,19 +139,21 @@ export default {
     },
     triggerFileInput() {
       document.getElementById('image').click();
+    },
+    closePopup() {
+      this.showPopup = false;
+      this.aideIA = '';
     }
   }
 };
 </script>
 
 <style scoped>
-
 body {
-    font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
   margin: 0;
-  /* font-family: 'Arial', sans-serif; */
   background: url('/src/images/fond-papier.svg') center/cover no-repeat;
 }
 
@@ -188,7 +197,6 @@ body {
 }
 
 .left-panel {
-  
   flex: 3;
   position: relative;
   display: flex;
@@ -242,26 +250,27 @@ body {
 .custom-panel label {
   color: white;
 }
+
 .custom-panel h2 {
   font-size: 1.5rem;
 }
+
 .custom-panel label {
   font-family: "Lato", sans-serif;
   font-weight: 100;
   font-style: normal;
   margin-bottom: 1rem;
   font-size: 1rem;
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
 }
-p{
+
+p {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
   color: white;
-}
-.custom-panel label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: 600;
 }
 
 textarea {
@@ -314,53 +323,26 @@ textarea {
 
 .popup-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  top:65px;
+  right: 0;
+  width: 28%;
+  height: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
 }
 
-.popup-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  z-index: 100;
-  pointer-events: none; /* Permet de cliquer en dessous sauf sur la popup */
-}
-
 .popup {
-    font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  background: white;
-  color: black;
-  padding: 1.5rem;
-  border-radius: 15px;
-  width: 100%;
-  max-width: 350px;
-  margin: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: relative;
+  background: #421318;
+  color: white;
+  padding: 2rem;
+  width: 90%;
+  height: 90%; 
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  pointer-events: auto; /* Active le clic dans la popup */
-}
-
-.popup label {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 .popup select,
@@ -372,5 +354,16 @@ textarea {
   padding: 0.5rem;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
 }
 </style>
