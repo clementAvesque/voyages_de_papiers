@@ -34,6 +34,7 @@ export default {
 
 
         button.addEventListener("click", () => {
+          console.log(pair)
           console.log(pairIndex)
           let other_numb = JSON.parse(JSON.stringify(pair));
           button.classList.add("flipped")
@@ -60,8 +61,22 @@ export default {
 
                   pair[pairIndex].forEach(value => {
                     GoodNumb.push(value)
+                    if(GoodNumb.length === numb_of_pair * 2){
+                      Array.from(document.querySelectorAll("button")).forEach(btn => {
+                        setTimeout(() => {
+                          btn.style.display = "none"
+                        btn.remove();
+                        document.getElementById("game").textContent = "Bravo ! Vous avez gagné 10%!";
+                        document.getElementById("game").style.width = "100%";
+                        document.getElementById("game").style.display = "flex";
+                        document.getElementById("game").style.justifyContent = "center";
+                        document.getElementById("game").style.alignItems = "center";
+                      }, 1000)
+                      });
+                    }
                     console.log(GoodNumb)
                   })
+
                   //sinon attendre 1seconde puis changer le texte a l'interieur des boutons si les id ne font pas partie des valeurs du tableau goodnumb
                 } else {
                   setTimeout(() => {
@@ -106,8 +121,6 @@ export default {
         ArrayOfPair.push(pair)
       }
       return ArrayOfPair
-
-
     },
 
   }
@@ -116,12 +129,23 @@ export default {
 </script>
 
 <style>
+
+.cormorant-garamond {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: auto;
+    font-style: normal;
+}
+
 #game {
   display: flex;
   flex-wrap: wrap;
   padding-left: 5vw;
   gap: 70px;
   transition: all 0.5s;
+  font-size: 32pt;
+  font-weight: bold;
+  color: #fff;
+  font-family: "Cormorant Garamond", serif;
 }
 
 #game button {
@@ -131,7 +155,7 @@ export default {
   height: 12vw;
   border: none;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 
   border-radius: 5px;
 }
