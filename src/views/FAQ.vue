@@ -8,7 +8,7 @@
             </ul>
         </nav>
         <div id="container">
-            <div class="question" v-for="(question, index) in actual_content" @click="question_target = index">
+            <div class="question" v-for="(question, index) in actual_content" @click="ask(index)">
                 <h3>{{ question.ans }}</h3>
                 <p v-show="index === question_target">{{ question.rep }}</p>
             </div>
@@ -228,6 +228,13 @@ export default {
         };
     },
     methods: {
+        ask(numb) {
+            if (this.question_target === numb) {
+                this.question_target = -1;
+            } else {
+                this.question_target = numb;
+            }
+        },
         category(objet) {
             this.selectedCategory= objet
             this.question_target = -1
@@ -302,6 +309,7 @@ nav ul {
     font-family: "Cormorant Garamond", serif;
     font-size: 16pt;
     font-weight: 700;
+    cursor: pointer;
 }
 
 #faq {
