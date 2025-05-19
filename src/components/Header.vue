@@ -7,7 +7,7 @@ import { RouterLink } from 'vue-router';
 <template>
   <header>
     <img src="../images/logo-white.svg" alt="Logo">
-    <RouterLink to="/" style="text-decoration: none; color: white;">Acceuil</RouterLink>
+    <RouterLink to="/" style="text-decoration: none; color: white;">Accueil</RouterLink>
     <RouterLink to="/Article" style="text-decoration: none; color: white;">Votre journal</RouterLink>
     <RouterLink to="/team" style="text-decoration: none; color: white;">Notre équipe</RouterLink>
     <RouterLink to="/FAQ" style="text-decoration: none; color: white;">FAQ</RouterLink>
