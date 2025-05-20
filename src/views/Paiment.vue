@@ -114,7 +114,6 @@ export default {
       selectedPaymentMethod: 'card',
       promoCode: '',
       showConfirmationPopup: false,
-      cartStore: useCartStore().gameFinish,
     };
   },
   computed: {
