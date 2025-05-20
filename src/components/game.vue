@@ -1,9 +1,10 @@
 <script>
 import artCard from '../images/img_game/art_card.svg';
 import carCard from '../images/img_game/car_card.svg';
-import informaticCard from '../images/img_game/informatic_card.svg';
+import logo from '../images/img_game/logoCard.svg';
 import politicCard from '../images/img_game/politic_card.svg';
 import backCards from '../images/img_game/back_cards.svg';
+import mode from '../images/img_game/mode.svg';
 
 export default {
   mounted() {
@@ -15,8 +16,9 @@ export default {
       let arrayOfImage = [
         artCard,
         carCard,
-        informaticCard,
-        politicCard     
+        logo,
+        politicCard,
+        mode
       ];
       let GoodNumb = [];
       let pair = this.getpair(numb_of_pair)
@@ -61,18 +63,19 @@ export default {
 
                   pair[pairIndex].forEach(value => {
                     GoodNumb.push(value)
-                    if(GoodNumb.length === numb_of_pair * 2){
-                      Array.from(document.querySelectorAll("button")).forEach(btn => {
-                        setTimeout(() => {
-                          btn.style.display = "none"
-                        btn.remove();
-                        document.getElementById("game").textContent = "Bravo ! Vous avez gagné 10%!";
-                        document.getElementById("game").style.width = "100%";
-                        document.getElementById("game").style.display = "flex";
-                        document.getElementById("game").style.justifyContent = "center";
-                        document.getElementById("game").style.alignItems = "center";
-                      }, 1000)
-                      });
+                    if (GoodNumb.length === numb_of_pair * 2) {
+                      setTimeout(() => {
+                        // Supprime tous les boutons
+                        document.querySelectorAll("#game button").forEach(btn => btn.remove());
+                        const gameZone = document.getElementById("game");
+                        gameZone.textContent = "Bravo ! Le code est : journal10";
+                        gameZone.style.width = "100%";
+                        gameZone.style.display = "flex";
+                        gameZone.style.justifyContent = "center";
+                        gameZone.style.alignItems = "center";
+                        useCartStore().gameFinish = true;
+                        console.log(useCartStore().gameFinish);
+                      }, 1000);
                     }
                     console.log(GoodNumb)
                   })
@@ -129,11 +132,10 @@ export default {
 </script>
 
 <style>
-
 .cormorant-garamond {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: auto;
-    font-style: normal;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: auto;
+  font-style: normal;
 }
 
 #game {
@@ -155,7 +157,7 @@ export default {
   height: 12vw;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
 
   border-radius: 5px;
 }
@@ -177,10 +179,8 @@ export default {
 
 .back_flipped {
   animation: flipBack 0.6s ease forwards;
-  /* Animation pour le retournement */
 }
 
-/* Animation pour retourner la carte vers l'arrière */
 @keyframes flipBack {
   0% {
     transform: rotateY(180deg);

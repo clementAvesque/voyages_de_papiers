@@ -9,7 +9,8 @@
             <div class="payment-methods">
               <label><input type="radio" v-model="selectedPaymentMethod" value="card" /> Carte Bancaire</label>
               <label><input type="radio" v-model="selectedPaymentMethod" value="paypal" /> PayPal</label>
-              <label><input type="radio" v-model="selectedPaymentMethod" value="google-apple" /> Google Pay / Apple Pay</label>
+              <label><input type="radio" v-model="selectedPaymentMethod" value="google-apple" /> Google Pay / Apple
+                Pay</label>
             </div>
 
             <div v-if="selectedPaymentMethod === 'card'">
@@ -61,9 +62,6 @@
             </div>
           </div>
 
-          <div class="promo">
-            <input id="promo" v-model="promoCode" type="text" placeholder="Entrez votre code" />
-          </div>
 
           <div class="totals">
             <p>Sous-total : {{ subtotalBeforeDiscount.toFixed(2) }} €</p>
@@ -80,7 +78,8 @@
         <button @click="showConfirmationPopup = false" class="close-icon" aria-label="Fermer le popup">✕</button>
         <h2>Validation de votre commande</h2>
         <p>Votre aventure personnalisée ne fait que commencer.</p>
-        <p>Nous avons bien reçu votre commande et notre équipe s'apprête à lui donner vie avec soin et sens du détail.</p>
+        <p>Nous avons bien reçu votre commande et notre équipe s'apprête à lui donner vie avec soin et sens du détail.
+        </p>
         <p>
           Un cadeau unique est en préparation, pensé pour créer l’émotion, raviver les souvenirs et marquer les esprits.
           Chaque page est conçue pour raconter une histoire, celle que vous avez choisie d’offrir.
@@ -93,7 +92,8 @@
         </ul>
         <p>Merci de faire confiance à Voyage de Papier.</p>
         <p>
-          Nous avons hâte que cette création prenne place entre les mains de celles de la personne à qui vous la destinez.
+          Nous avons hâte que cette création prenne place entre les mains de celles de la personne à qui vous la
+          destinez.
         </p>
       </div>
     </div>
@@ -101,6 +101,9 @@
 </template>
 
 <script>
+
+
+
 export default {
   name: 'PaiementPage',
   data() {
@@ -111,6 +114,7 @@ export default {
       selectedPaymentMethod: 'card',
       promoCode: '',
       showConfirmationPopup: false,
+      cartStore: useCartStore().gameFinish,
     };
   },
   computed: {
@@ -145,16 +149,19 @@ export default {
 </script>
 
 <style scoped>
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
 }
+
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 .container {
   display: flex;
   flex: 1;
@@ -162,6 +169,7 @@ body, html {
   overflow: hidden;
   background-color: #8F3037;
 }
+
 .left-side {
   width: 50%;
   background-color: #421318;
@@ -170,6 +178,7 @@ body, html {
   align-items: center;
   padding: 2rem;
 }
+
 .form-sections {
   z-index: 1;
   width: 100%;
@@ -178,7 +187,9 @@ body, html {
   gap: 2rem;
   align-items: center;
 }
-.payment, .contact {
+
+.payment,
+.contact {
   background-color: #8F3037;
   color: white;
   padding: 1rem;
@@ -187,20 +198,24 @@ body, html {
   max-height: 50%;
   overflow-y: auto;
 }
+
 .input-group {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
+
 .input-group input {
   padding: 0.75rem;
   border-radius: 5px;
   border: 1px solid #aaa;
 }
+
 .inline-inputs {
   display: flex;
   gap: 1rem;
 }
+
 .finalize-btn {
   background-color: #8F3037;
   color: #ffffff;
@@ -211,6 +226,7 @@ body, html {
   margin-top: 1rem;
   width: 90%;
 }
+
 .right-side {
   width: 50%;
   background-color: white;
@@ -218,16 +234,20 @@ body, html {
   overflow-y: auto;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .summary {
   width: 100%;
 }
+
 .items {
   margin-bottom: 1rem;
 }
+
 .item {
   display: flex;
   gap: 1rem;
 }
+
 .item img {
   width: 150px;
   height: 150px;
@@ -235,17 +255,21 @@ body, html {
   border-radius: 10%;
   margin-top: 4.5rem;
 }
+
 .details {
   flex: 1;
   font-size: larger;
 }
+
 .promo {
   margin-top: 4rem;
 }
+
 .totals {
   margin-top: 2rem;
   font-size: large;
 }
+
 #promo {
   border: 2px solid #A83941;
   padding: 10px 15px;
@@ -256,13 +280,16 @@ body, html {
   background-color: white;
   transition: 0.3s;
 }
+
 #promo::placeholder {
   color: #A83941;
   opacity: 0.6;
 }
+
 #promo:focus {
   box-shadow: 0 0 8px #A83941;
 }
+
 .confirmation-popup {
   position: fixed;
   top: 0;
@@ -275,8 +302,9 @@ body, html {
   align-items: center;
   z-index: 9999;
 }
+
 .popup-content {
-  position: relative; 
+  position: relative;
   background-color: #4a1212;
   color: white;
   padding: 2rem;
@@ -284,6 +312,7 @@ body, html {
   border-radius: 1rem;
   text-align: center;
 }
+
 .close-icon {
   position: absolute;
   top: 1rem;
@@ -294,11 +323,13 @@ body, html {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
 .popup-content ul {
   text-align: left;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
 .popup-content .close-btn {
   background-color: #a41d36;
   border: none;

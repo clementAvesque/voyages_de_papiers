@@ -11,22 +11,25 @@
                 <h2>La personnalisation en 3 étapes</h2>
                 <div id="rules">
                     <div class="rule">
+                        <img src="../images/select_year.svg" alt="">
                         <h3>Choisir une année</h3>
                         <p>Sélectionnez une année (2000-2010) pour définir le contexte historique et ses événements
                             marquants.</p>
-                        <img src="../images/select_year.svg" alt="">
+                        
                     </div>
                     <div class="rule middle">
+                        <img src="../images/select_theme.svg" alt="">
                         <h3>Choisir un thême</h3>
                         <p>Choisissez un thème pour personnaliser votre journal avec des articles et anecdotes
                             marquants, adaptés aux passions du destinataire.</p>
-                        <img src="../images/select_theme.svg" alt="">
+                        
                     </div>
                     <div class="rule">
+                    <img src="../images/personnalisation.svg" alt="">
                         <h3>Personnaliser</h3>
                         <p>Ajoutez la touche finale en intégrant une photo, un mot personnel ou une anecdote pour rendre
                             votre journal unique et émouvant.</p>
-                        <img src="../images/personnalisation.svg" alt="">
+                        
                     </div>
                 </div>
                 <button @click="goToArticle">Sélectionner les votres</button>
@@ -400,8 +403,12 @@ button {
 .middle {
     border-left: solid 2px white;
     border-right: solid 2px white;
+
 }
 
+.middle img {
+    margin-bottom: 40px;
+}
 .rule h3 {
     padding: 0;
     font-size: clamp(3vw, 4.44vw, 5vw);

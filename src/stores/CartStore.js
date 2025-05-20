@@ -5,6 +5,7 @@ export const useCartStore = defineStore('cart', {
     date: '',
     theme: '',
     image: '', // Image pour le panier
+    gameFinish: false
   }),
   actions: {
     setDate(date) {
@@ -19,5 +20,10 @@ export const useCartStore = defineStore('cart', {
     setTexte(texte) {
       this.texte = texte;
     }
-  }
+  },
+  computed: {
+  cartStore() {
+    return useCartStore();
+  },
+}
 });

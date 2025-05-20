@@ -13,8 +13,6 @@
                 <p v-show="index === question_target">{{ question.rep }}</p>
             </div>
         </div>
-
-
     </section>
 </template>
 

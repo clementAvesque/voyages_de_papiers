@@ -14,13 +14,15 @@
         <div class="presentation">
             <div class="personne"
             @mouseover="clement = true"
-            @mouseleave="clement= false">
+            @mouseleave="clement= false"
+            id="clement">
             <p v-show="clement === true">Clément 
                 <br>Développeur</p>
             </div>
             <div class="personne"
              @mouseover="ninon = true"
              @mouseleave="ninon= false"
+            id="ninon"
             >
                 <p v-show="ninon === true">Ninon 
                     <br>Développeuse</p>
@@ -31,13 +33,15 @@
         <div class="presentation">
             <div class="personne"
             @mouseover="tristan = true"
-            @mouseleave="tristan= false">
+            @mouseleave="tristan= false"
+            id="tristan">
             <p v-show="tristan === true">Tristan
                 <br>Webdesign</p>
             </div>
             <div class="personne"
              @mouseover="laura = true"
              @mouseleave="laura= false"
+            id="laura"
             >
                 <p v-show="laura === true">Laura
                     <br>Graphiste</p>
@@ -67,6 +71,26 @@ export default {
 </script>
 
 <style scoped>
+#clement{
+    background-image: url("../images/img_createur/clement.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#ninon{
+    background-image: url("../images/img_createur/ninon.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#tristan{
+    background-image: url("../images/img_createur/tristan.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#laura{
+    background-image: url("../images/img_createur/laura.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 h3{
     font-family: "Cormorant Garamond", serif;
     font-size: 40pt;
@@ -85,8 +109,9 @@ h3{
 }
 
 
-.personne p{
+.personne p {
     width: auto;
+    color: white;
 }
 .personne{
     border-radius: 35px;
