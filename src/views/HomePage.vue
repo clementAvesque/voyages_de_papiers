@@ -15,21 +15,21 @@
                         <h3>Choisir une année</h3>
                         <p>Sélectionnez une année (2000-2010) pour définir le contexte historique et ses événements
                             marquants.</p>
-                        
+
                     </div>
                     <div class="rule middle">
                         <img src="../images/select_theme.svg" alt="">
                         <h3>Choisir un thême</h3>
                         <p>Choisissez un thème pour personnaliser votre journal avec des articles et anecdotes
                             marquants, adaptés aux passions du destinataire.</p>
-                        
+
                     </div>
                     <div class="rule">
-                    <img src="../images/personnalisation.svg" alt="">
+                        <img src="../images/personnalisation.svg" alt="">
                         <h3>Personnaliser</h3>
                         <p>Ajoutez la touche finale en intégrant une photo, un mot personnel ou une anecdote pour rendre
                             votre journal unique et émouvant.</p>
-                        
+
                     </div>
                 </div>
                 <button @click="goToArticle">Sélectionner les votres</button>
@@ -120,10 +120,12 @@ export default {
                 document.getElementById("information").style.opacity = "0"
                 document.getElementById("image").style.opacity = "0"
 
-            } else {setTimeout(() => {
-                document.getElementById("information").style.opacity = "1"
-                document.getElementById("image").style.opacity = "1"}
-            ,100)
+            } else {
+                setTimeout(() => {
+                    document.getElementById("information").style.opacity = "1"
+                    document.getElementById("image").style.opacity = "1"
+                }
+                    , 100)
                 document.getElementById("image").style.display = "block"
                 document.getElementById("information").style.display = "flex"
 
@@ -305,7 +307,7 @@ export default {
 
 #announce_game {
     width: 100vw;
-    height: 60vh;
+    padding: 5% 0%;
     background-color: rgba(120, 40, 46, 1);
     transition: all 0.3s;
     display: flex;
@@ -322,6 +324,7 @@ export default {
     background-repeat: no-repeat;
     background-size: contain;
     transition: all 0.3s;
+    justify-self: flex-start;
 
 }
 
@@ -409,6 +412,7 @@ button {
 .middle img {
     margin-bottom: 40px;
 }
+
 .rule h3 {
     padding: 0;
     font-size: clamp(3vw, 4.44vw, 5vw);
