@@ -102,6 +102,8 @@
 
 <script>
 
+import { useCartStore } from '/src/stores/CartStore';
+
 
 
 export default {
@@ -114,7 +116,7 @@ export default {
       selectedPaymentMethod: 'card',
       promoCode: '',
       showConfirmationPopup: false,
-      cartStore: useCartStore().gameFinish,
+      cartStore: useCartStore(),
     };
   },
   computed: {

@@ -45,10 +45,9 @@
           <img v-if="imagePreview" :src="imagePreview" alt="Aperçu" class="image-preview" />
         </form>
 
-        <!-- Sélecteur IA conditionnel -->
         <div v-if="imagePreview && texte" class="ia-selection">
           <label for="aideIA">Aidez-vous de l'IA</label>
-          <select id="aideIA" v-model="aideIA">
+          <select id="aideIA" v-model="aideIA" class="ia-select">
             <option disabled value="">Choisissez</option>
             <option value="non">Non</option>
             <option value="oui">Oui</option>
@@ -61,7 +60,6 @@
       </aside>
     </main>
 
-    <!-- POPUP -->
     <div v-if="showPopup" class="popup-overlay">
       <div class="popup">
         <button class="close-button" @click="closePopup">×</button>
@@ -71,15 +69,20 @@
         <select id="choixIA" v-model="choixIA">
           <option disabled value="">Choisissez</option>
           <option value="poeme">Poème</option>
-          <option value="histoire">Courte histoire</option>
         </select>
 
-        <label for="idee">Expliquez votre idée</label>
+        <label for="userInput">Expliquez votre idée</label>
         <textarea
-          id="idee"
+          id="userInput"
           v-model="ideeIA"
           placeholder="Décrivez votre idée ici..."
         ></textarea>
+
+        <button class="custom-button" @click="sendData">
+          Générer avec l'IA
+        </button>
+
+        <div id="response" class="ia-response">{{ iaResponse }}</div>
 
         <button class="custom-button" @click="goToPanier">
           Finaliser la préparation
@@ -107,6 +110,7 @@ export default {
       aideIA: '',
       choixIA: '',
       ideeIA: '',
+      iaResponse: '',
       showPopup: false
     };
   },
@@ -143,6 +147,28 @@ export default {
     closePopup() {
       this.showPopup = false;
       this.aideIA = '';
+    },
+    async sendData() {
+      const userInput = this.ideeIA;
+
+      try {
+        const response = await fetch('https://dav74-poeme.hf.space/request', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ txt: userInput })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+        this.iaResponse = data.response;
+      } catch (error) {
+        this.iaResponse = 'Erreur : ' + error.message;
+      }
     }
   }
 };
@@ -321,9 +347,26 @@ textarea {
   margin-top: 2rem;
 }
 
+.ia-select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #421318;
+  border: 1px solid #ccc;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+}
+
+.ia-select:focus {
+  outline: none;
+  border-color: #C04D55;
+  box-shadow: 0 0 0 3px rgba(192, 77, 85, 0.3);
+}
+
 .popup-overlay {
   position: fixed;
-  top:65px;
+  top: 65px;
   right: 0;
   width: 28%;
   height: 90%;
@@ -339,7 +382,7 @@ textarea {
   color: white;
   padding: 2rem;
   width: 90%;
-  height: 90%; 
+  height: 90%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -354,6 +397,15 @@ textarea {
   padding: 0.5rem;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+.ia-response {
+  background: white;
+  color: black;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  white-space: pre-line;
 }
 
 .close-button {

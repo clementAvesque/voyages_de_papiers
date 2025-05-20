@@ -68,7 +68,7 @@ export default {
                         // Supprime tous les boutons
                         document.querySelectorAll("#game button").forEach(btn => btn.remove());
                         const gameZone = document.getElementById("game");
-                        gameZone.textContent = "Bravo ! Le code est : journal10";
+                        gameZone.textContent = "Bravo ! Le code est : Journal10";
                         gameZone.style.width = "100%";
                         gameZone.style.display = "flex";
                         gameZone.style.justifyContent = "center";
