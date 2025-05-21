@@ -131,7 +131,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .cormorant-garamond {
   font-family: "Cormorant Garamond", serif;
   font-weight: auto;
