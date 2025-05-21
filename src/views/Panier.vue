@@ -149,12 +149,20 @@ function goToPayment() {
 .text p {
   margin: 0.25rem 0;
 }
-
 .recap {
   background-color: #A41D36;
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 5px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .item-actions {
