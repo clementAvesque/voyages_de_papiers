@@ -62,7 +62,9 @@
             </div>
           </div>
 
-
+          <div class="promo">
+            <input id="promo" v-model="promoCode" type="text" placeholder="Entrez votre code" />
+          </div>
           <div class="totals">
             <p>Sous-total : {{ subtotalBeforeDiscount.toFixed(2) }} €</p>
             <p v-if="promoCode === 'Journal10'">Code promo -10%</p>
