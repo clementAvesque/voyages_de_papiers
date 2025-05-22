@@ -84,7 +84,7 @@ export default {
                 } else {
                   setTimeout(() => {
                     // Parcourt tous les boutons du jeu
-                    document.querySelectorAll("button").forEach(btn => {
+                    document.querySelectorAll("#game button").forEach(btn => {
                       if (!GoodNumb.includes(Number(btn.id))) {
                         // Remet l'image de dos
                         btn.style.backgroundImage = `url(${backCards})`;
@@ -131,7 +131,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 .cormorant-garamond {
   font-family: "Cormorant Garamond", serif;
   font-weight: auto;
