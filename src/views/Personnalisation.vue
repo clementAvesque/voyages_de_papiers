@@ -100,10 +100,10 @@ export default {
     return {
       currentImage: 0,
       images: [
-        'src/images/auto2006-1.svg',
-        'src/images/auto2006-2.svg',
-        'src/images/auto2006-3.svg',
-        'src/images/auto2006-4.svg'
+        'src/images/Automobile-1977-1.svg',
+        'src/images/Automobile-1977-2.svg',
+        'src/images/Automobile-1977-3.svg',
+        'src/images/Automobile-1977-4.svg'
       ],
       imagePreview: null,
       texte: '',

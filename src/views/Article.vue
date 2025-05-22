@@ -16,17 +16,17 @@
         <label for="date">Date :</label>
         <select id="date" v-model="selectedDate">
           <option>Sélectionner une option...</option>
-          <option>2000</option>
-          <option>2001</option>
-          <option>2002</option>
-          <option>2003</option> 
-          <option>2004</option>
-          <option>2005</option>
-          <option>2006</option>
-          <option>2007</option>
-          <option>2008</option>
-          <option>2009</option>
-          <option>2010</option>
+          <option>1970</option>
+          <option>1971</option>
+          <option>1972</option>
+          <option>1973</option> 
+          <option>1974</option>
+          <option>1975</option>
+          <option>1976</option>
+          <option>1977</option>
+          <option>1978</option>
+          <option>1979</option>
+          <option>1980</option>
         </select>
 
         <label for="theme">Thème :</label>
@@ -66,10 +66,10 @@ export default {
         'src/images/journal4.svg'
       ],
       autoImages2005: [
-        'src/images/auto2006-1.svg',
-        'src/images/auto2006-2.svg',
-        'src/images/auto2006-3.svg',
-        'src/images/auto2006-4.svg'
+        'src/images/Automobile-1977-1.svg',
+        'src/images/Automobile-1977-2.svg',
+        'src/images/Automobile-1977-3.svg',
+        'src/images/Automobile-1977-4.svg'
       ],
       themeImages: [
         { src: '/src/images/1.svg', title: 'Gastronomie' },
@@ -89,7 +89,7 @@ export default {
 
   computed: {
     images() {
-      if (this.selectedDate === '2006' && this.selectedTheme === 'Automobile') {
+      if (this.selectedDate === '1977' && this.selectedTheme === 'Automobile') {
         return this.autoImages2005;
       }
       return this.defaultImages;
