@@ -86,7 +86,6 @@ export default {
                     // Parcourt tous les boutons du jeu
                     document.querySelectorAll("#game button").forEach(btn => {
                       if (!GoodNumb.includes(Number(btn.id))) {
-                        // Remet l'image de dos
                         btn.style.backgroundImage = `url(${backCards})`;
                         // Retire la classe flipped pour l'animation retour
                         btn.classList.remove("flipped");
