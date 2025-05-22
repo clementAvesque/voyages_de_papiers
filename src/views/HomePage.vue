@@ -13,7 +13,7 @@
                     <div class="rule">
                         <img src="../images/select_year.svg" alt="">
                         <h3>Choisir une année</h3>
-                        <p>Sélectionnez une année (2000-2010) pour définir le contexte historique et ses événements
+                        <p>Sélectionnez une année (1970-1980) pour définir le contexte historique et ses événements
                             marquants.</p>
 
                     </div>

@@ -46,7 +46,7 @@
         </form>
 
         <div v-if="imagePreview && texte" class="ia-selection">
-          <label for="aideIA">Aidez-vous de l'IA</label>
+          <label for="aideIA">Enrichir votre journal (IA):</label>
           <select id="aideIA" v-model="aideIA" class="ia-select">
             <option disabled value="">Choisissez</option>
             <option value="non">Non</option>
