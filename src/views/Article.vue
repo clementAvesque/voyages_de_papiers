@@ -291,7 +291,6 @@ body {
   padding: 0.5rem;
 }
 
-/* === Custom Select Thème === */
 .custom-select {
   position: relative;
   cursor: pointer;
